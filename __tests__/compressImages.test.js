@@ -37,14 +37,13 @@ test('compressImages1A', () => {
 
 test('compressImages1B', () => {
   const tree = mkdir('my documents', [
-    mkfile('avatar.jpg', { size: 100 }),
-    mkfile('passport.jpg', { size: 200 }),
-    mkfile('family.jpg', { size: 150 }),
+    mkfile('avatar2.jpg', { size: 90 }),
+    mkfile('passport2.jpg', { size: 200 }),
     mkfile('addresses', { size: 125 }),
     mkdir('presentations', [
       mkfile('ch.jpg', { size: 200 }),
       mkfile('rm', { size: 20 }),
-      mkdir('newFldre.jpg', [], { size: 90 }),
+      mkdir('newFolder.jpg', [], { size: 70 }),
     ], { size: 20, hidden: false }),
   ]);
 
@@ -52,18 +51,13 @@ test('compressImages1B', () => {
 
   const expectation = [
     {
-      name: 'avatar.jpg',
-      meta: { size: 50 },
+      name: 'avatar2.jpg',
+      meta: { size: 45 },
       type: 'file',
     },
     {
-      name: 'passport.jpg',
+      name: 'passport2.jpg',
       meta: { size: 100 },
-      type: 'file',
-    },
-    {
-      name: 'family.jpg',
-      meta: { size: 75 },
       type: 'file',
     },
     {
@@ -87,8 +81,8 @@ test('compressImages1B', () => {
           type: 'file',
         },
         {
-          name: 'newFldre.jpg',
-          meta: { size: 90 },
+          name: 'newFolder.jpg',
+          meta: { size: 70 },
           type: 'directory',
         },
       ],

@@ -7,6 +7,7 @@ import {
 
 import compressImages from '../src/compressImages.js';
 
+/*
 test('compressImages1A', () => {
   const tree = mkdir('my documents', [
     mkfile('avatar.jpg', { size: 100 }),
@@ -34,6 +35,7 @@ test('compressImages1A', () => {
   
   expect(compressImages(tree)).toEqual(newTree);
 });
+*/
 
 test('compressImages1B', () => {
   const tree = mkdir('my documents', [

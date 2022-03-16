@@ -1,7 +1,6 @@
 import {
   getChildren,
   getMeta,
-  isDirectory,
   mkdir, mkfile,
 } from '@hexlet/immutable-fs-trees';
 
@@ -21,7 +20,7 @@ test('compressImages1A', () => {
       mkdir('newFldre.jpg', [], { size: 90 }),
     ], { size: 20, hidden: false }),
   ]);
-  
+
   const newTree = mkdir('my documents', [
     mkfile('avatar.jpg', { size: 50 }),
     mkfile('passport.jpg', { size: 100 }),
@@ -33,7 +32,7 @@ test('compressImages1A', () => {
       mkdir('newFldre.jpg', [], { size: 90 }),
     ], { size: 20, hidden: false }),
   ]);
-  
+
   expect(compressImages(tree)).toEqual(newTree);
 });
 */
@@ -91,7 +90,7 @@ test('compressImages1B', () => {
       ],
     },
   ];
-  
+
   expect(newTree).toMatchObject({
     children: expectation,
     type: 'directory',

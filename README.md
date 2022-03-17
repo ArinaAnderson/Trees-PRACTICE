@@ -50,7 +50,7 @@ Add Makefile.
 
 Add code and tests for it.
 
-Add .gitignore (!coverage and node modules from).
+Add .gitignore (~~coverage and node modules~~).
 
 ## Remotely (on github)
 
@@ -64,6 +64,7 @@ Set up codeclimate Maintainability checks:
 5. Add Maintainability badge to README.md from : Repo Settings / Badges / Maintainability Badge *(Markdown)*
 
 Add github workflow that would build project and run tests.
+
 To refactor 🙀 --> to separate build and test jobs.
 
 Add github actions badge for the workflow **build-and-test.yml**.

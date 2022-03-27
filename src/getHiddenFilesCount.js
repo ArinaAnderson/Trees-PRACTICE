@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   mkdir, mkfile, getChildren, getName, isFile,
 } from '@hexlet/immutable-fs-trees';

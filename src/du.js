@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
   mkdir, mkfile, getChildren, getName, getMeta, isFile,
 } from '@hexlet/immutable-fs-trees';
+import sumOfArrElems from './utils.js';
 
 /*
 Реализуйте и экспортируйте по умолчанию функцию, которая принимает на вход директорию
@@ -12,6 +13,7 @@ import {
 Сами директории размера не имеют.
 */
 
+/*
 const sumOfArrElems = (arr) => {
   const iter = (acc, idx) => {
     if (idx === arr.length) {
@@ -24,6 +26,7 @@ const sumOfArrElems = (arr) => {
   };
   return iter(0, 0);
 };
+*/
 
 const tree = mkdir('/', [
   mkdir('etc', [

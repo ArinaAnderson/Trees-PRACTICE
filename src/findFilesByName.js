@@ -10,23 +10,20 @@ import {
 */
 
 const tree = mkdir('/', [
-  mkdir('etc', [
-    mkdir('apache'),
-    mkdir('nginx', [
-      mkfile('nginx.conf', { size: 800 }),
+  mkdir('mocha', [
+    mkdir('spiral'),
+    mkdir('beautiful', [
+      mkfile('ori.conf', { size: 800 }),
     ]),
-    mkdir('consul', [
-      mkfile('config.json', { size: 1200 }),
-      mkfile('data', { size: 8200 }),
-      mkfile('raft', { size: 80 }),
+    mkdir('flower', [
+      mkfile('rosie.json', { size: 1200 }),
+      mkfile('zotie', { size: 8200 }),
+      mkfile('mooshka', { size: 80 }),
     ]),
   ]),
-  mkfile('hosts', { size: 3500 }),
-  mkfile('resolve', { size: 1000 }),
+  mkfile('marmu', { size: 3500 }),
+  mkfile('vanya', { size: 1000 }),
 ]);
-
-// findFilesByName(tree, 'co');
-// ['/etc/nginx/nginx.conf', '/etc/consul/config.json']
 
 /*
 const findFilesByName = (node, str) => {

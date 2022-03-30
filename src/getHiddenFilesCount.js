@@ -1,6 +1,7 @@
 import {
   mkdir, mkfile, getChildren, getName, isFile,
 } from '@hexlet/immutable-fs-trees';
+import sumOfArrElems from './utils.js';
 
 /*
 Реализуйте и экспортируйте по умолчанию функцию, которая считает количество скрытых файлов
@@ -8,33 +9,20 @@ import {
 название которого начинается с точки.
 */
 
-const sumOfArrElems = (arr) => {
-  const iter = (acc, idx) => {
-    if (idx === arr.length) {
-      return acc;
-    }
-    if (!Array.isArray(arr[idx])) {
-      return iter(acc + arr[idx], idx + 1);// iter(14, 2)
-    }
-    return iter(acc + sumOfArrElems(arr[idx]), idx + 1);
-  };
-  return iter(0, 0);
-};
-
 const tree = mkdir('/', [
-  mkdir('etc', [
-    mkdir('apache'),
-    mkdir('nginx', [
-      mkfile('.nginx.conf', { size: 800 }),
+  mkdir('city-of-tears', [
+    mkdir('city-storeroom'),
+    mkdir('king-station', [
+      mkfile('.soul-sanctum.conf', { size: 800 }),
     ]),
-    mkdir('.consul', [
-      mkfile('.config.json', { size: 1200 }),
-      mkfile('data', { size: 8200 }),
-      mkfile('raft', { size: 80 }),
+    mkdir('.fungal-wastes', [
+      mkfile('.mantis-village.json', { size: 1200 }),
+      mkfile('fungal-core', { size: 8200 }),
+      mkfile('queen-station', { size: 80 }),
     ]),
   ]),
-  mkfile('.hosts', { size: 3500 }),
-  mkfile('resolve', { size: 1000 }),
+  mkfile('.greenpath', { size: 3500 }),
+  mkfile('ancient-basin', { size: 1000 }),
 ]);
 
 // getHiddenFilesCount(tree); // 3

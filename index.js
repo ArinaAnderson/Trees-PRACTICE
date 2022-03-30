@@ -16,7 +16,7 @@ console.log(import.meta.url);
 file:///Users/marinalex/MY-FOLDERS/Gvenya-prog/2021-2022/HEXLET/Tree/PRACTICE/Trees-PRACTICE/index.js
 */
 
-// calling 'node ../index.js' at the root of the project ./src
+// calling 'node ../index.js' at the location ./src
 /*
 {
   dirname: '/Users/marinalex/MY-FOLDERS/Gvenya-prog/2021-2022/HEXLET/Tree/PRACTICE/Trees-PRACTICE',

@@ -32,16 +32,15 @@ const tree = mkdir('/', [
   mkdir('etc', [
     mkdir('apache'),
     mkdir('nginx', [
-      mkfile('nginx.conf', { size: 800 }),
+      mkfile('nginx.conf', { size: 500 }),
     ]),
     mkdir('consul', [
-      mkfile('config.json', { size: 1200 }),
-      mkfile('data', { size: 8200 }),
+      mkfile('config.json', { size: 300 }),
       mkfile('raft', { size: 80 }),
     ]),
   ]),
-  mkfile('hosts', { size: 3500 }),
-  mkfile('resolve', { size: 1000 }),
+  mkfile('hosts', { size: 350 }),
+  mkfile('resolve', { size: 100 }),
 ]);
 
 // du(tree);

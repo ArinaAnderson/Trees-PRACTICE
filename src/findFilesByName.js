@@ -16,13 +16,13 @@ const tree = mkdir('/', [
       mkfile('ori.conf', { size: 800 }),
     ]),
     mkdir('flower', [
-      mkfile('rosie.json', { size: 1200 }),
-      mkfile('zotie', { size: 8200 }),
-      mkfile('mooshka', { size: 80 }),
+      mkfile('rosie.json', { size: 120 }),
+      mkfile('zotie', { size: 1200 }),
+      mkfile('mooshka', { size: 70 }),
     ]),
   ]),
-  mkfile('marmu', { size: 3500 }),
-  mkfile('vanya', { size: 1000 }),
+  mkfile('marmu', { size: 500 }),
+  mkfile('vanya', { size: 80 }),
 ]);
 
 /*

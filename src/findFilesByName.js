@@ -1,7 +1,6 @@
 import path from 'path';
-import _ from 'lodash';
 import {
-  mkdir, mkfile, isDirectory, getChildren, getName, getMeta, isFile,
+  mkdir, mkfile, getChildren, getName, isFile,
 } from '@hexlet/immutable-fs-trees';
 
 /*
@@ -25,7 +24,7 @@ const tree = mkdir('/', [
   mkfile('hosts', { size: 3500 }),
   mkfile('resolve', { size: 1000 }),
 ]);
- 
+
 // findFilesByName(tree, 'co');
 // ['/etc/nginx/nginx.conf', '/etc/consul/config.json']
 

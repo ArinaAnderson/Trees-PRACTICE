@@ -29,5 +29,9 @@ const editNodeName = (node, callback) => {
   return mkdir(newName, newChildren, newMeta);
 };
 
+// EXAMPLE:
+const lowerCaseNodeName = (node) => editNodeName(node, (name) => name.toLowerCase());
+
 console.log(JSON.stringify(editNodeName(tree, (name) => name.toLowerCase()), null, '  '));
+console.log(JSON.stringify(lowerCaseNodeName(treeAdditional), null, '  '));
 console.log(JSON.stringify(editNodeName(tree, () => 'Marmu'), null, '  '));

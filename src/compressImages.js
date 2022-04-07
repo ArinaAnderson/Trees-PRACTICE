@@ -12,21 +12,21 @@ import {
 Картинками считаются все файлы заканчивающиеся на .jpg.
 */
 
-const compressImages = (node) => {
-  const children = getChildren(node);
-  const newChildren = children.map((el) => {
-    const name = getName(el);
+const compressImages = (dir, compression = 2) => {
+  const children = getChildren(dir);
+  const compressedChildren = children.map((el) => {
     if (isDirectory(el)) {
-      return compressImages(el);
+      return compressImages(el, compression);
     }
-    const meta = _.cloneDeep(getMeta(el));
-    if (!name.endsWith('.jpg')) {
-      return mkfile(name, meta);
+    const name = getName(el);
+    const clonedMeta = _.cloneDeep(getMeta(el));
+
+    if (name.endsWith('jpg') && _.has(clonedMeta, 'size')) {
+      clonedMeta.size /= compression;
     }
-    meta.size /= 2;
-    return mkfile(name, meta);
+    return mkfile(name, clonedMeta);
   });
-  return mkdir(getName(node), newChildren, _.cloneDeep(getMeta(node)));
+  return mkdir(getName(dir), compressedChildren, _.cloneDeep(getMeta(dir)));
 };
 
 export default compressImages;

@@ -76,6 +76,7 @@ const compressImages = (node, compression = 2) => editNodeMeta(node, (el) => {
 });
 console.log(JSON.stringify(compressImages(tree, 4), null, '  '));
 
+export default editNodeMeta;
 // TO DO:
 // -- introduce startLevel and finishLevel ???
 // -- compressImages based on editNodeMeta...

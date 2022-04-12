@@ -78,5 +78,5 @@ console.log(JSON.stringify(compressImages(tree, 4), null, '  '));
 
 export default editNodeMeta;
 // TO DO:
-// -- introduce startLevel and finishLevel ???
+// -- introduce startLevel finishLevel ??? --> these params must be in callback or specialized func
 // -- compressImages based on editNodeMeta...

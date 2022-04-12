@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
   mkdir, mkfile, isDirectory, getChildren, getName, getMeta,
 } from '@hexlet/immutable-fs-trees';
+import editNodeMeta from './high-order-functions/editNodeMeta.js';
 
 /*
 Реализуйте и экспортируйте функцию compressImages(), которая принимает на вход директорию,
@@ -12,7 +13,8 @@ import {
 Картинками считаются все файлы заканчивающиеся на .jpg.
 */
 
-const compressImages = (dir, compression = 2) => {
+// ORIGINAL VERSION:
+const compressImagesOriginal = (dir, compression = 2) => {
   const children = getChildren(dir);
   const compressedChildren = children.map((el) => {
     if (isDirectory(el)) {
@@ -28,6 +30,15 @@ const compressImages = (dir, compression = 2) => {
   });
   return mkdir(getName(dir), compressedChildren, _.cloneDeep(getMeta(dir)));
 };
+
+// USING ABSTRACTIONS:
+const compressImages = (node, compression = 2) => editNodeMeta(node, (el) => {
+  const clonedMeta = _.cloneDeep(getMeta(el));
+  if (getName(el).endsWith('jpg') && _.has(clonedMeta, 'size')) {
+    clonedMeta.size /= compression;
+  }
+  return clonedMeta;
+}); 
 
 export default compressImages;
 

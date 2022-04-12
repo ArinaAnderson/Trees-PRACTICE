@@ -21,8 +21,8 @@ const tree = mkdir('/', [
 
 const editNodeMeta = (node, callback) => {
   const name = getName(node);
-  // const clonedMeta = callback(_.cloneDeep(getMetagetMeta(node)));
-  const editedMeta = callback(node); // callback(getMeta(node))
+  const editedMeta = callback(node);
+  // const editedMeta = callback(getMeta(node));
   if (isFile(node)) {
     return mkfile(name, editedMeta);
   }
@@ -30,20 +30,23 @@ const editNodeMeta = (node, callback) => {
   return mkdir(name, editedChildren, editedMeta);
 };
 
-// EXAMPLE:
+// EXAMPLES:
+
 // different approach:
-const changeOwnerOriginal = (node, owner) => {
-  const newMeta = _.cloneDeep(getMeta(node));
+const changeOwnerOrig = (el, owner) => {
+  const newMeta = _.cloneDeep(getMeta(el));
+  // const newMeta = _.cloneDeep(meta);
   if (_.has(newMeta, 'owner')) {
     newMeta.owner = owner;
   }
   return newMeta;
 };
-console.log(JSON.stringify(editNodeMeta(tree, (treeData) => changeOwnerOriginal(treeData, 'SPIRAL')), null, '  '));
+console.log(JSON.stringify(editNodeMeta(tree, (meta) => changeOwnerOrig(meta, 'SPIRAL')), null, '  '));
 
 // opposite approach:
 const changeOwner = (treeData, owner) => editNodeMeta(treeData, (el) => {
   const newMeta = _.cloneDeep(getMeta(el));
+  // const newMeta = _.cloneDeep(meta);
   if (_.has(newMeta, 'owner')) {
     newMeta.owner = owner;
   }
@@ -52,8 +55,8 @@ const changeOwner = (treeData, owner) => editNodeMeta(treeData, (el) => {
 console.log(JSON.stringify(changeOwner(tree, 'MARMU'), null, '  '));
 
 const replaceOwner = (treeData, oldOwner, newOwner) => editNodeMeta(treeData, (el) => {
-  // (meta) => {
-  const newMeta = _.cloneDeep(getMeta(el)); // _.cloneDeep(meta);
+  const newMeta = _.cloneDeep(getMeta(el));
+  // const newMeta = _.cloneDeep(meta);
   if (_.has(newMeta, 'owner') && newMeta.owner === oldOwner) {
     newMeta.owner = newOwner;
   }
@@ -62,11 +65,14 @@ const replaceOwner = (treeData, oldOwner, newOwner) => editNodeMeta(treeData, (e
 console.log(JSON.stringify(replaceOwner(tree, 'Basya', 'Spiral'), null, '  '));
 
 const compressImages = (node, compression = 2) => editNodeMeta(node, (el) => {
-  const clonedMeta = _.cloneDeep(getMeta(el));
-  if (getName(el).endsWith('jpg') && _.has(clonedMeta, 'size')) {
-    clonedMeta.size /= compression;
+  const newMeta = _.cloneDeep(getMeta(el));
+
+  // here, there is a problem with passing node to getName
+  // so, the callback of editNodeMeta needs 1 more parametre: elem (which is node itself)
+  if (getName(el).endsWith('jpg') && _.has(newMeta, 'size')) {
+    newMeta.size /= compression;
   }
-  return clonedMeta;
+  return newMeta;
 });
 console.log(JSON.stringify(compressImages(tree, 4), null, '  '));
 

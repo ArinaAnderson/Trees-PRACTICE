@@ -45,7 +45,7 @@ test('compressImages1B', () => {
     mkdir('presentations', [
       mkfile('ch.jpg', { size: 200 }),
       mkfile('rm', { size: 27 }),
-      mkdir('newFolder.jpg', [], { size: 70 }),
+      mkdir('newFolder', [], { size: 70 }),
     ], { size: 20, hidden: false }),
   ]);
 
@@ -83,7 +83,7 @@ test('compressImages1B', () => {
           type: 'file',
         },
         {
-          name: 'newFolder.jpg',
+          name: 'newFolder',
           meta: { size: 70 },
           type: 'directory',
         },
@@ -161,7 +161,7 @@ test('compressImages-2-HEXLET', () => {
   });
 });
 
-test('compressImages-3-HEXLET', () => {
+test('immutable-HEXLET', () => {
   const tree = mkdir('my documents', [
     mkfile('avatar.jpg', { size: 100, attributes: { hide: false, readOnly: true } }),
     mkdir('presentations'),

@@ -14,11 +14,11 @@ import editNodeMeta from './high-order-functions/editNodeMeta.js';
 */
 
 // ORIGINAL VERSION:
-const compressImagesOriginal = (dir, compression = 2) => {
+export const compressImagesOriginal = (dir, compression = 2) => {
   const children = getChildren(dir);
   const compressedChildren = children.map((el) => {
     if (isDirectory(el)) {
-      return compressImages(el, compression);
+      return compressImagesOriginal(el, compression);
     }
     const name = getName(el);
     const clonedMeta = _.cloneDeep(getMeta(el));
@@ -38,7 +38,7 @@ const compressImages = (node, compression = 2) => editNodeMeta(node, (el) => {
     clonedMeta.size /= compression;
   }
   return clonedMeta;
-}); 
+});
 
 export default compressImages;
 

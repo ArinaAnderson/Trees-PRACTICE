@@ -3,6 +3,7 @@ import {
   mkdir, mkfile, getChildren, getName, isDirectory, isFile, getMeta,
 } from '@hexlet/immutable-fs-trees';
 
+/*
 const tree = mkdir('/', [
   mkdir('CIty-of-tears', [
     mkdir('city-storeroom'),
@@ -31,6 +32,7 @@ const tree2 = mkdir('/', [
   mkfile('Greenpath'),
   mkfile('ancient-BAsin'),
 ]);
+*/
 
 const editNodeName = (node, changeNameCallback) => {
   const newName = changeNameCallback(node);
@@ -43,48 +45,46 @@ const editNodeName = (node, changeNameCallback) => {
 };
 
 // EXAMPLES:
-const lowerCaseNodeName = (node) => editNodeName(node, (elem) => getName(elem).toLowerCase());
-console.log(JSON.stringify(lowerCaseNodeName(tree), null, '  '));
+export const lowerCaseNodeName = (node) => editNodeName(node, (el) => getName(el).toLowerCase());
+// console.log(JSON.stringify(lowerCaseNodeName(tree), null, '  '));
 
-const lowerCaseDirName = (node) => editNodeName(node, (elem) => {
+export const lowerCaseDirName = (node) => editNodeName(node, (elem) => {
   if (isDirectory(elem)) {
     return getName(elem).toLowerCase();
   }
   return getName(elem);
 });
-console.log(JSON.stringify(lowerCaseDirName(tree), null, '  '));
+// console.log(JSON.stringify(lowerCaseDirName(tree), null, '  '));
 
 // const lowerCaseNodeNameB = (node) => getName(node).toLowerCase();
 // console.log(JSON.stringify(editNodeName(tree, lowerCaseNodeNameB), null, '  '));
 
-const renameNodeNameOriginal = (node, newName) => editNodeName(node, () => newName);
-console.log(JSON.stringify(renameNodeNameOriginal(tree, 'MARMU'), null, '  '));
+export const renameNodeNameOriginal = (node, newName) => editNodeName(node, () => newName);
+// console.log(JSON.stringify(renameNodeNameOriginal(tree, 'MARMU'), null, '  '));
 
-const renameNodeName = (node, oldName, newName) => editNodeName(node, (elem) => {
+export const renameNodeName = (node, oldName, newName) => editNodeName(node, (elem) => {
   if (getName(elem).toLowerCase() === oldName.toLowerCase()) {
     return newName;
   }
   return getName(elem);
 });
-console.log(JSON.stringify(renameNodeName(tree2, 'Greenpath', 'QGs'), null, '  '));
+// console.log(JSON.stringify(renameNodeName(tree2, 'Greenpath', 'QGs'), null, '  '));
 
-const renameFileName = (node, oldName, newName) => editNodeName(node, (elem) => {
+export const renameFileName = (node, oldName, newName) => editNodeName(node, (elem) => {
   if (isFile(elem) && getName(elem).toLowerCase() === oldName.toLowerCase()) {
     return newName;
   }
   return getName(elem);
 });
-console.log(JSON.stringify(renameFileName(tree2, 'Greenpath', 'QGs'), null, '  '));
+// console.log(JSON.stringify(renameFileName(tree2, 'Greenpath', 'QGs'), null, '  '));
 
-const downcaseFileNames = (node) => editNodeName(node, (elem) => {
+export const downcaseFileNames = (node) => editNodeName(node, (elem) => {
   if (isFile(elem)) {
     return getName(elem).toLowerCase();
   }
   return getName(elem);
 });
-console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
-
-// console.log(JSON.stringify(editNodeName(tree, () => 'Marmu'), null, '  '));
+// console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
 
 export default editNodeName;
 

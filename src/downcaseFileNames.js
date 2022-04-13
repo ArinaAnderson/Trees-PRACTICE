@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
   mkdir, mkfile, getChildren, getName, getMeta, isFile,
 } from '@hexlet/immutable-fs-trees';
+import editNodeName from './high-order-functions/editNodeName.js';
 
 /*
 Реализуйте и экспортируйте по умолчанию функцию,
@@ -14,22 +15,35 @@ const tree = mkdir('/', [
   mkdir('eTc', [
     mkdir('NgiNx'),
     mkdir('CONSUL', [
-      mkfile('config.json'),
+      mkfile('cOnfig.json'),
+      mkfile('SPIRAL.json'),
     ]),
   ]),
   mkfile('hOsts'),
 ]);
 
-const downcaseFileNames = (node) => {
+// ORIGINAL VERSION:
+export const downcaseFileNamesOriginal = (node) => {
   const name = getName(node);
   const newMeta = _.cloneDeep(getMeta(node));
   if (isFile(node)) {
     return mkfile(name.toLowerCase(), newMeta);
   }
   const children = getChildren(node);
-  const newChildren = children.map(downcaseFileNames);
+  const newChildren = children.map(downcaseFileNamesOriginal);
   return mkdir(name, newChildren, newMeta);
 };
+
+// console.log(JSON.stringify(downcaseFileNamesOriginal(tree), null, '  '));
+
+// USING ABSTRACTIONS:
+const downcaseFileNames = (node) => editNodeName(node, (elem) => {
+  const name = getName(elem);
+  if (isFile(elem)) {
+    return name.toLowerCase();
+  }
+  return name;
+});
 
 console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {
-  mkdir, mkfile, isDirectory, getChildren, getName, getMeta,
+  getName, getMeta,
 } from '@hexlet/immutable-fs-trees';
 import editNodeMeta from './high-order-functions/editNodeMeta.js';
 

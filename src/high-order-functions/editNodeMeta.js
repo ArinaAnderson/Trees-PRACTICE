@@ -3,6 +3,7 @@ import {
   mkdir, mkfile, getChildren, getName, isFile, getMeta,
 } from '@hexlet/immutable-fs-trees';
 
+/*
 const tree = mkdir('/', [
   mkdir('CIty-of-tears', [
     mkdir('city-storeroom', [], { owner: 'Basya' }),
@@ -18,6 +19,7 @@ const tree = mkdir('/', [
   mkfile('.Greenpath', { size: 500, owner: 'Basya' }),
   mkfile('ancient-BAsin.jpg', { size: 1000 }),
 ]);
+*/
 
 const editNodeMeta = (node, callback) => {
   const name = getName(node);
@@ -33,7 +35,7 @@ const editNodeMeta = (node, callback) => {
 // EXAMPLES:
 
 // different approach:
-const changeOwnerOrig = (el, owner) => {
+export const changeOwnerOrig = (el, owner) => {
   const newMeta = _.cloneDeep(getMeta(el));
   // const newMeta = _.cloneDeep(meta);
   if (_.has(newMeta, 'owner')) {
@@ -41,10 +43,13 @@ const changeOwnerOrig = (el, owner) => {
   }
   return newMeta;
 };
-console.log(JSON.stringify(editNodeMeta(tree, (meta) => changeOwnerOrig(meta, 'SPIRAL')), null, '  '));
+// console.log(JSON.stringify(editNodeMeta(tree, (meta) =>
+//    changeOwnerOrig(meta, 'SPIRAL')),
+//    null,
+//    '  '));
 
 // opposite approach:
-const changeOwner = (treeData, owner) => editNodeMeta(treeData, (el) => {
+export const changeOwner = (treeData, owner) => editNodeMeta(treeData, (el) => {
   const newMeta = _.cloneDeep(getMeta(el));
   // const newMeta = _.cloneDeep(meta);
   if (_.has(newMeta, 'owner')) {
@@ -52,9 +57,9 @@ const changeOwner = (treeData, owner) => editNodeMeta(treeData, (el) => {
   }
   return newMeta;
 });
-console.log(JSON.stringify(changeOwner(tree, 'MARMU'), null, '  '));
+// console.log(JSON.stringify(changeOwner(tree, 'MARMU'), null, '  '));
 
-const replaceOwner = (treeData, oldOwner, newOwner) => editNodeMeta(treeData, (el) => {
+export const replaceOwner = (treeData, oldOwner, newOwner) => editNodeMeta(treeData, (el) => {
   const newMeta = _.cloneDeep(getMeta(el));
   // const newMeta = _.cloneDeep(meta);
   if (_.has(newMeta, 'owner') && newMeta.owner === oldOwner) {
@@ -62,8 +67,9 @@ const replaceOwner = (treeData, oldOwner, newOwner) => editNodeMeta(treeData, (e
   }
   return newMeta;
 });
-console.log(JSON.stringify(replaceOwner(tree, 'Basya', 'Spiral'), null, '  '));
+// console.log(JSON.stringify(replaceOwner(tree, 'Basya', 'Spiral'), null, '  '));
 
+/*
 const compressImages = (node, compression = 2) => editNodeMeta(node, (el) => {
   const newMeta = _.cloneDeep(getMeta(el));
 
@@ -75,6 +81,7 @@ const compressImages = (node, compression = 2) => editNodeMeta(node, (el) => {
   return newMeta;
 });
 console.log(JSON.stringify(compressImages(tree, 4), null, '  '));
+*/
 
 export default editNodeMeta;
 // TO DO:

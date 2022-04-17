@@ -11,17 +11,6 @@ import editNodeName from './high-order-functions/editNodeName.js';
 Результат в виде обработанной директории возвращается наружу.
 */
 
-const tree = mkdir('/', [
-  mkdir('eTc', [
-    mkdir('NgiNx'),
-    mkdir('CONSUL', [
-      mkfile('cOnfig.json'),
-      mkfile('SPIRAL.json'),
-    ]),
-  ]),
-  mkfile('hOsts'),
-]);
-
 // ORIGINAL VERSION:
 export const downcaseFileNamesOriginal = (node) => {
   const name = getName(node);
@@ -45,7 +34,7 @@ const downcaseFileNames = (node) => editNodeName(node, (elem) => {
   return name;
 });
 
-console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
+// console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
 
 export default downcaseFileNames;
 

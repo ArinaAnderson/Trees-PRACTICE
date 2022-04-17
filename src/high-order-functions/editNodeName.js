@@ -78,13 +78,15 @@ export const renameFileName = (node, oldName, newName) => editNodeName(node, (el
 });
 // console.log(JSON.stringify(renameFileName(tree2, 'Greenpath', 'QGs'), null, '  '));
 
+/*
 export const downcaseFileNames = (node) => editNodeName(node, (elem) => {
   if (isFile(elem)) {
     return getName(elem).toLowerCase();
   }
   return getName(elem);
 });
-// console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
+console.log(JSON.stringify(downcaseFileNames(tree), null, '  '));
+*/
 
 export default editNodeName;
 

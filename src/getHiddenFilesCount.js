@@ -1,5 +1,5 @@
 import {
-  mkdir, mkfile, getChildren, getName, isFile,
+  getChildren, getName, isFile,
 } from '@hexlet/immutable-fs-trees';
 import sumOfArrElems from './utils.js';
 
@@ -9,39 +9,51 @@ import sumOfArrElems from './utils.js';
 название которого начинается с точки.
 */
 
-const tree = mkdir('/', [
-  mkdir('city-of-tears', [
-    mkdir('city-storeroom'),
-    mkdir('king-station', [
-      mkfile('.soul-sanctum.conf', { size: 800 }),
-    ]),
-    mkdir('.fungal-wastes', [
-      mkfile('.mantis-village.json', { size: 1200 }),
-      mkfile('fungal-core', { size: 8200 }),
-      mkfile('queen-station', { size: 80 }),
-    ]),
-  ]),
-  mkfile('.greenpath', { size: 3500 }),
-  mkfile('ancient-basin', { size: 1000 }),
-]);
-
-// getHiddenFilesCount(tree); // 3
-
 const getHiddenFilesCount = (node) => {
-  if (isFile(node) && getName(node).startsWith('.')) {
-    return 1;
-  }
   if (isFile(node)) {
-    return 0;
+    return getName(node).startsWith('.') ? 1 : 0;
   }
   const children = getChildren(node);
   const hiddenFiles = children.map(getHiddenFilesCount);
   return sumOfArrElems(hiddenFiles);
 };
 
-console.log(getHiddenFilesCount(tree));
-
 export default getHiddenFilesCount;
+
+/*
+const tree = mkdir('/', [
+  mkdir('etc', [
+    mkdir('apache'),
+    mkdir('nginx', [
+      mkfile('.nginx.conf', { size: 800 }),
+    ]),
+    mkdir('.consul', [
+      mkfile('.config.json', { size: 1200 }),
+      mkfile('data', { size: 8200 }),
+      mkfile('raft', { size: 80 }),
+    ]),
+  ]),
+  mkfile('.hosts', { size: 3500 }),
+  mkfile('resolve', { size: 1000 }),
+]);
+*/
+// getHiddenFilesCount(tree); // 3
+
+// Visualization of getHiddenFilesCount(tree):
+/*
+    res for tree: [ [ [], [ 1 ], [ 1, 0, 0 ] ], 1, 0 ]
+              '/: [                                  ]
+           'etc': [ [                        ],      ]
+        'apache': [ [ []                     ],      ]
+         'nginx': [ [ [], []                 ],      ]
+   '.nginx.conf': [ [ [], [ 1 ]              ],      ]
+       '.consul': [ [ [], [ 1 ], []          ],      ]
+  '.config.json': [ [ [], [ 1 ], [ 1 ]       ],      ]
+          'data': [ [ [], [ 1 ], [ 1, 0 ]    ],      ]
+          'raft': [ [ [], [ 1 ], [ 1, 0, 0 ] ],      ]
+        '.hosts': [ [ [], [ 1 ], [ 1, 0, 0 ] ], 1    ]
+       'resolve': [ [ [], [ 1 ], [ 1, 0, 0 ] ], 1, 0 ]
+*/
 
 /*
 // Teacher's solution:

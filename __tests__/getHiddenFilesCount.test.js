@@ -5,6 +5,22 @@ import getHiddenFilesCount from '../src/getHiddenFilesCount.js';
 
 test('given a tree with hidden files and hidden dirs', () => {
   const tree = mkdir('/', [
+    mkdir('etc', [
+      mkdir('apache'),
+      mkdir('nginx', [
+        mkfile('.nginx.conf', { size: 800 }),
+      ]),
+      mkdir('.consul', [
+        mkfile('.config.json', { size: 1200 }),
+        mkfile('data', { size: 8200 }),
+        mkfile('raft', { size: 80 }),
+      ]),
+    ]),
+    mkfile('.hosts', { size: 3500 }),
+    mkfile('resolve', { size: 1000 }),
+  ]);
+  /*
+  const tree = mkdir('/', [
     mkdir('city-of-tears', [
       mkdir('.city-storeroom'),
       mkdir('king-station', [
@@ -19,11 +35,13 @@ test('given a tree with hidden files and hidden dirs', () => {
     mkfile('.greenpath', { size: 3500 }),
     mkfile('ancient-basin', { size: 1000 }),
   ]);
+  */
   const count = getHiddenFilesCount(tree);
   expect(count).toEqual(3);
 });
 
 test('given a tree with no hidden files', () => {
+  /*
   const tree = mkdir('/', [
     mkdir('.fungal-wastes', [
       mkfile('mantis-village.json', { size: 1200 }),
@@ -33,8 +51,24 @@ test('given a tree with no hidden files', () => {
     mkfile('greenpath', { size: 3500 }),
     mkfile('ancient-basin', { size: 1000 }),
   ]);
+  */
+  const tree = mkdir('/', [
+    mkdir('.etc', [
+      mkdir('.apache'),
+      mkdir('nginx', [
+        mkfile('nginx.conf', { size: 800 }),
+      ]),
+    ]),
+    mkdir('.consul', [
+      mkfile('config.json', { size: 1200 }),
+      mkfile('.raft', { size: 80 }),
+    ]),
+    mkfile('hosts', { size: 3500 }),
+    mkfile('resolve', { size: 1000 }),
+  ]);
+
   const count = getHiddenFilesCount(tree);
-  expect(count).toEqual(0);
+  expect(count).toEqual(1);
 });
 
 test('given an emptyTree', () => {

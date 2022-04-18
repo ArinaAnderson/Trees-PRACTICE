@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {
-  mkfile, mkdir, getName, getMeta, getChildren, isDirectory,
+  mkfile, mkdir, getName, getMeta, getChildren, isFile,
 } from '@hexlet/immutable-fs-trees';
 import editNodeMeta from './high-order-functions/editNodeMeta.js';
 
@@ -14,6 +14,7 @@ import editNodeMeta from './high-order-functions/editNodeMeta.js';
 */
 
 // ORIGINAL VERSION:
+/*
 export const compressImagesOriginal = (dir, compression = 2) => {
   const children = getChildren(dir);
   const compressedChildren = children.map((el) => {
@@ -29,6 +30,20 @@ export const compressImagesOriginal = (dir, compression = 2) => {
     return mkfile(name, clonedMeta);
   });
   return mkdir(getName(dir), compressedChildren, _.cloneDeep(getMeta(dir)));
+};
+*/
+
+export const compressImagesOriginalRefac = (node) => {
+  if (isFile(node)) {
+    const meta = _.cloneDeep(getMeta(node));
+    if (getName(node).endsWith('jpg') && _.has(meta, 'size')) {
+      meta.size /= 2;
+    }
+    return mkfile(getName(node), meta);
+  }
+  const children = getChildren(node);
+  const compressedChildren = children.map(compressImagesOriginalRefac);
+  return mkdir(getName(node), compressedChildren, _.cloneDeep(getMeta(node)));
 };
 
 // USING ABSTRACTIONS:

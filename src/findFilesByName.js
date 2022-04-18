@@ -1,6 +1,6 @@
 import path from 'path';
 import {
-  mkdir, mkfile, getChildren, getName, isFile,
+  getChildren, getName, isFile,
 } from '@hexlet/immutable-fs-trees';
 
 /*
@@ -9,6 +9,7 @@ import {
 Функция должна вернуть полные пути до файлов.
 */
 
+/*
 const tree = mkdir('/', [
   mkdir('mocha', [
     mkdir('spiral'),
@@ -24,6 +25,7 @@ const tree = mkdir('/', [
   mkfile('marmu', { size: 500 }),
   mkfile('vanya', { size: 80 }),
 ]);
+*/
 
 /*
 const findFilesByName = (node, str) => {
@@ -65,7 +67,9 @@ const findFilesByName = (node, str) => {
   return iter(node, '');
 };
 
-console.log(findFilesByName(tree, 'co'));
+// console.log(findFilesByName(tree, 'co'));
+
+export default findFilesByName;
 
 /*
 // Teacher's solution:

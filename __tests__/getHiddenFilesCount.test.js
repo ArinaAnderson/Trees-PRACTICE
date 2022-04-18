@@ -5,22 +5,6 @@ import getHiddenFilesCount from '../src/getHiddenFilesCount.js';
 
 test('given a tree with hidden files and hidden dirs', () => {
   const tree = mkdir('/', [
-    mkdir('etc', [
-      mkdir('apache'),
-      mkdir('nginx', [
-        mkfile('.nginx.conf', { size: 800 }),
-      ]),
-      mkdir('.consul', [
-        mkfile('.config.json', { size: 1200 }),
-        mkfile('data', { size: 8200 }),
-        mkfile('raft', { size: 80 }),
-      ]),
-    ]),
-    mkfile('.hosts', { size: 3500 }),
-    mkfile('resolve', { size: 1000 }),
-  ]);
-  /*
-  const tree = mkdir('/', [
     mkdir('city-of-tears', [
       mkdir('.city-storeroom'),
       mkdir('king-station', [
@@ -35,40 +19,22 @@ test('given a tree with hidden files and hidden dirs', () => {
     mkfile('.greenpath', { size: 3500 }),
     mkfile('ancient-basin', { size: 1000 }),
   ]);
-  */
   const count = getHiddenFilesCount(tree);
   expect(count).toEqual(3);
 });
 
 test('given a tree with no hidden files', () => {
-  /*
   const tree = mkdir('/', [
-    mkdir('.fungal-wastes', [
-      mkfile('mantis-village.json', { size: 1200 }),
-      mkfile('fungal-core', { size: 8200 }),
-      mkfile('queen-station', { size: 80 }),
+    mkdir('.books', [
+      mkfile('detective.json', { size: 1200 }),
+      mkfile('poem', { size: 8200 }),
+      mkfile('biographu', { size: 80 }),
     ]),
-    mkfile('greenpath', { size: 3500 }),
-    mkfile('ancient-basin', { size: 1000 }),
+    mkfile('HKnight', { size: 3500 }),
+    mkfile('secret', { size: 1000 }),
   ]);
-  */
-  const tree = mkdir('/', [
-    mkdir('.etc', [
-      mkdir('.apache'),
-      mkdir('nginx', [
-        mkfile('nginx.conf', { size: 800 }),
-      ]),
-    ]),
-    mkdir('.consul', [
-      mkfile('config.json', { size: 1200 }),
-      mkfile('.raft', { size: 80 }),
-    ]),
-    mkfile('hosts', { size: 3500 }),
-    mkfile('resolve', { size: 1000 }),
-  ]);
-
   const count = getHiddenFilesCount(tree);
-  expect(count).toEqual(1);
+  expect(count).toEqual(0);
 });
 
 test('given an emptyTree', () => {

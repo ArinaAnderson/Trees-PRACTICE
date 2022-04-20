@@ -1,5 +1,5 @@
 import {
-  getChildren, isFile, mkdir, mkfile,
+  getChildren, isFile,
 } from '@hexlet/immutable-fs-trees';
 import sumOfArrElems from './utils.js';
 

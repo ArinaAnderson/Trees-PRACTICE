@@ -48,17 +48,3 @@ export const getNodesCountAcc2 = (node) => {
   };
   return iter(0, 0) + 1;
 };
-
-const nonEmptyTree = mkdir('/', [
-  mkdir('etc', [
-    mkfile('bashrc'),
-    mkfile('consul.cfg'),
-  ]),
-  mkfile('hexletrc'),
-  mkdir('bin', [
-    mkfile('ls'),
-    mkfile('cat'),
-  ]),
-]);
-
-console.log(getNodesCountAcc2(nonEmptyTree));

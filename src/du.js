@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {
-  mkdir, mkfile, getChildren, getName, getMeta, isFile,
+  getChildren, getName, getMeta, isFile,
 } from '@hexlet/immutable-fs-trees';
 import sumOfArrElems from './utils.js';
 
@@ -13,60 +13,30 @@ import sumOfArrElems from './utils.js';
 Сами директории размера не имеют.
 */
 
-/*
-const sumOfArrElems = (arr) => {
-  const iter = (acc, idx) => {
-    if (idx === arr.length) {
-      return acc;
-    }
-    if (!Array.isArray(arr[idx])) {
-      return iter(acc + arr[idx], idx + 1);// iter(14, 2)
-    }
-    return iter(acc + sumOfArrElems(arr[idx]), idx + 1);
-  };
-  return iter(0, 0);
-};
-*/
-
-const tree = mkdir('/', [
-  mkdir('etc', [
-    mkdir('apache'),
-    mkdir('nginx', [
-      mkfile('nginx.conf', { size: 500 }),
-    ]),
-    mkdir('consul', [
-      mkfile('config.json', { size: 300 }),
-      mkfile('raft', { size: 80 }),
-    ]),
-  ]),
-  mkfile('hosts', { size: 350 }),
-  mkfile('resolve', { size: 100 }),
-]);
-
-// du(tree);
-// [
-//   ['etc', 10280],
-//   ['hosts', 3500],
-//   ['resolve', 1000],
-// ]
-
-const calcNodeSize = (node) => {
+export const getDirSpaceReduce = (node) => {
   if (isFile(node)) {
     return _.has(getMeta(node), 'size') ? getMeta(node).size : 0;
   }
   const children = getChildren(node);
-  const sizes = children.map(calcNodeSize);
-  return sumOfArrElems(sizes);
+  const dirSpace = children.reduce((acc, el) => acc + getDirSpaceReduce(el), 0);
+  return dirSpace;
 };
 
-const du = (node) => {
+export const getDirSpaceMap = (node) => {
+  if (isFile(node)) {
+    return _.has(getMeta(node), 'size') ? getMeta(node).size : 0;
+  }
   const children = getChildren(node);
-  const res = children.map((el) => ([getName(el), calcNodeSize(el)]));
-  // return res.sort((a, b) => b[1] - a[1]);
-  return res.sort(([, size1], [, size2]) => size2 - size1);
+  const dirSpace = children.map(getDirSpaceMap);
+  return sumOfArrElems(dirSpace);
 };
 
-console.log(du(tree));
+export const du = (node) => {
+  const firstLvlNodes = getChildren(node);
+  const result = firstLvlNodes.map((el) => [getName(el), getDirSpaceMap(el)]);
+  // return result.sort((a, b) => b[1] - a[1]);
+  return result.sort(([, size1], [, size2]) => size2 - size1);
+};
 
 /*
 // Teacher's solution:

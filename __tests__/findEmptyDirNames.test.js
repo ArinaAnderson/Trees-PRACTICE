@@ -4,7 +4,7 @@ import {
 import {
   findEmptyDirNamesReduce,
   findEmptyDirNamesMap,
-  findEmptyDirNamesComplex1,
+  // findEmptyDirNamesComplex1,
   findEmptyDirNamesComplex2,
 } from '../src/findEmptyDirNames.js';
 
@@ -46,12 +46,10 @@ describe('testing simple version of findEmptyDirNames', () => {
 
 describe('testing complex version of findEmptyDirNames', () => {
   test('receives non-empty tree and depth of 2', () => {
-    expect(findEmptyDirNamesComplex1(tree, 2)).toEqual(['apache', 'logs']);
     expect(findEmptyDirNamesComplex2(tree, 2)).toEqual(['apache', 'logs']);
   });
 
   test('receives non-empty tree and default depth', () => {
-    expect(findEmptyDirNamesComplex1(tree)).toEqual(['apache', 'data', 'logs']);
     expect(findEmptyDirNamesComplex2(tree)).toEqual(['apache', 'data', 'logs']);
   });
 });

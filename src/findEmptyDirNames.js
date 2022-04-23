@@ -47,6 +47,8 @@ const findEmptyDirNames = (tree) => {
 findEmptyDirNames(tree); // ['apache', 'data', 'logs']
 */
 
+/*
+// too complex:
 export const findEmptyDirNamesComplex1 = (tree, maxDepth = Infinity) => {
   const iter = (node, acc) => {
     if (acc > maxDepth) {
@@ -64,6 +66,7 @@ export const findEmptyDirNamesComplex1 = (tree, maxDepth = Infinity) => {
   };
   return iter(tree, 0);
 };
+*/
 
 export const findEmptyDirNamesComplex2 = (tree, maxDepth = Infinity) => {
   if (isFile(tree)) {

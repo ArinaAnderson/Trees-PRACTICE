@@ -9,65 +9,18 @@ import {
 Функция должна вернуть полные пути до файлов.
 */
 
-/*
-const tree = mkdir('/', [
-  mkdir('mocha', [
-    mkdir('spiral'),
-    mkdir('beautiful', [
-      mkfile('ori.conf', { size: 800 }),
-    ]),
-    mkdir('flower', [
-      mkfile('rosie.json', { size: 120 }),
-      mkfile('zotie', { size: 1200 }),
-      mkfile('mooshka', { size: 70 }),
-    ]),
-  ]),
-  mkfile('marmu', { size: 500 }),
-  mkfile('vanya', { size: 80 }),
-]);
-*/
-
-/*
 const findFilesByName = (node, str) => {
-  const iter = (elem, ancestry) => {
-    const elemName = getName(elem);
-    if (isFile(elem) && elemName.includes(str)) {
-      return path.join(ancestry, elemName);
+  const iter = (acc, el) => {
+    const name = getName(el);
+    if (isFile(el)) {
+      return name.includes(str) ? path.join(acc, name) : [];
     }
-
-    if (isFile(elem)) {
-      return '';
-    }
-
-    const children = getChildren(elem);
-    const paths = children.map((child) => iter(child, `${ancestry}/${elemName}`));
-    return paths;
-  };
-
-  return iter(node, '');
-};
-*/
-
-const findFilesByName = (node, str) => {
-  const iter = (elem, ancestry) => {
-    const elemName = getName(elem);
-    if (isFile(elem) && elemName.includes(str)) {
-      return path.join(ancestry, elemName);
-    }
-
-    if (isFile(elem)) {
-      return [];
-    }
-
-    const children = getChildren(elem);
-    const paths = children.map((child) => iter(child, `${ancestry}/${elemName}`));
+    const children = getChildren(el);
+    const paths = children.map((child) => iter(path.join(acc, name), child));
     return paths.flat();
   };
-
-  return iter(node, '');
+  return iter('', node);
 };
-
-// console.log(findFilesByName(tree, 'co'));
 
 export default findFilesByName;
 

@@ -35,6 +35,7 @@ const editNodeMeta = (node, callback) => {
 // EXAMPLES:
 
 // different approach:
+/*
 export const changeOwnerOrig = (el, owner) => {
   const newMeta = _.cloneDeep(getMeta(el));
   // const newMeta = _.cloneDeep(meta);
@@ -43,10 +44,11 @@ export const changeOwnerOrig = (el, owner) => {
   }
   return newMeta;
 };
-// console.log(JSON.stringify(editNodeMeta(tree, (meta) =>
-//    changeOwnerOrig(meta, 'SPIRAL')),
-//    null,
-//    '  '));
+console.log(JSON.stringify(editNodeMeta(tree, (meta) =>
+  changeOwnerOrig(meta, 'SPIRAL')),
+  null,
+  '  '));
+*/
 
 // opposite approach:
 export const changeOwner = (treeData, owner) => editNodeMeta(treeData, (el) => {

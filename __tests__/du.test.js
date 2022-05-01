@@ -26,19 +26,13 @@ const emptyDir = mkdir('empty', []);
 const file = { name: 'file1', meta: { size: 125 }, type: 'file' };
 
 describe('testing getDirSpace*', () => {
-  test('receives non-empty tree', () => {
-    expect(getDirSpaceMap(tree)).toBe(1330);
-    expect(getDirSpaceReduce(tree)).toBe(1330);
-  });
-
-  test('receives empty tree', () => {
-    expect(getDirSpaceMap(emptyDir)).toBe(0);
-    expect(getDirSpaceReduce(emptyDir)).toBe(0);
-  });
-
-  test('receives file', () => {
-    expect(getDirSpaceMap(file)).toBe(125);
-    expect(getDirSpaceReduce(file)).toBe(125);
+  test.each([
+    { treeStr: tree, expected: 1330 },
+    { treeStr: emptyDir, expected: 0 },
+    { treeStr: file, expected: 125 },
+  ])('testing getDirSpace*', ({ treeStr, expected }) => {
+    expect(getDirSpaceMap(treeStr)).toEqual(expected);
+    expect(getDirSpaceReduce(treeStr)).toEqual(expected);
   });
 });
 

@@ -26,6 +26,17 @@ const emptyTree = {
   type: 'directory',
 };
 
+test.each([
+  { treeStr: nonEmptyTree, expected: 8 },
+  { treeStr: emptyTree, expected: 1 },
+  { treeStr: file, expected: 1 },
+])('testing getNodesCount*', ({ treeStr, expected }) => {
+  expect(getNodesCountMap(treeStr)).toBe(expected);
+  expect(getNodesCountReduce(treeStr)).toBe(expected);
+  expect(getNodesCountAcc(treeStr)).toBe(expected);
+  expect(getNodesCountAcc2(treeStr)).toBe(expected);
+});
+/*
 describe('testing countNodesMap', () => {
   test('receives non-empty tree', () => {
     expect(getNodesCountMap(nonEmptyTree)).toBe(8);
@@ -81,3 +92,4 @@ describe('testing countNodesAcc2', () => {
     expect(getNodesCountAcc2(file)).toBe(1);
   });
 });
+*/

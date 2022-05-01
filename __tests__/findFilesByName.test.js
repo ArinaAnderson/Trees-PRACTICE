@@ -39,6 +39,38 @@ const emptyDir = mkdir('empty', []);
 
 const file = mkfile('marmu');
 
+test.each([
+  {
+    treeStr: tree1,
+    string: 'co',
+    expected: [
+      '/etc/nginx/nginx.conf',
+      '/etc/consul/config.json',
+    ],
+  },
+  {
+    treeStr: tree2,
+    string: 'mo',
+    expected: [
+      '/mocha/beautiful/mocha.conf',
+      '/mocha/flower/mooshka',
+    ],
+  },
+  {
+    treeStr: emptyDir,
+    string: 'co',
+    expected: [],
+  },
+  {
+    treeStr: file,
+    string: 'mu',
+    expected: 'marmu',
+  },
+])('testing findFilesByName', ({ treeStr, string, expected }) => {
+  expect(findFilesByName(treeStr, string)).toEqual(expected);
+});
+
+/*
 test('receives non-empty tree1', () => {
   expect(findFilesByName(tree1, 'co')).toEqual([
     '/etc/nginx/nginx.conf',
@@ -60,3 +92,4 @@ test('receives an empty dir', () => {
 test('receives file', () => {
   expect(findFilesByName(file, 'mu')).toEqual('marmu');
 });
+*/

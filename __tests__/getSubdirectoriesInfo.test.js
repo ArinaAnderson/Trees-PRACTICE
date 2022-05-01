@@ -67,6 +67,7 @@ test.each([
   expect(getSubdirectoriesInfoMap(treeStr)).toEqual(expected);
   expect(getSubdirectoriesInfoReduce(treeStr)).toEqual(expected);
 });
+
 /*
 describe('testing getFilesCount*', () => {
   test('receives non-empty tree', () => {

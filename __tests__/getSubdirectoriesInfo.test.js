@@ -41,6 +41,33 @@ const emptyTree = {
 
 const file = { name: undefined, meta: {}, type: 'file' };
 
+test.each([
+  { treeStr: tree, expected: 5 },
+  { treeStr: noFilesTree, expected: 0 },
+  { treeStr: emptyTree, expected: 0 },
+  { treeStr: file, expected: 1 },
+])('testing getFilesCount*', ({ treeStr, expected }) => {
+  expect(getFilesCountMap(treeStr)).toBe(expected);
+  expect(getFilesCountReduce(treeStr)).toBe(expected);
+});
+
+const threeResult = [['etc', 1], ['consul', 2]];
+const noFilesTreeResult = [
+  ['Marmu&Vanya', 0],
+  ['Gvenya', 0],
+  ['Spiral', 0],
+  ['Rosie', 0],
+  ['Basya', 0],
+];
+
+test.each([
+  { treeStr: tree, expected: threeResult },
+  { treeStr: noFilesTree, expected: noFilesTreeResult },
+])('testing getSubdirectoriesInfo*', ({ treeStr, expected }) => {
+  expect(getSubdirectoriesInfoMap(treeStr)).toEqual(expected);
+  expect(getSubdirectoriesInfoReduce(treeStr)).toEqual(expected);
+});
+/*
 describe('testing getFilesCount*', () => {
   test('receives non-empty tree', () => {
     expect(getFilesCountMap(tree)).toBe(5);
@@ -62,7 +89,8 @@ describe('testing getFilesCount*', () => {
     expect(getFilesCountReduce(file)).toBe(1);
   });
 });
-
+*/
+/*
 describe('getSubdirectoriesInfo*', () => {
   test('receives tree', () => {
     expect(getSubdirectoriesInfoMap(tree)).toEqual([['etc', 1], ['consul', 2]]);
@@ -86,3 +114,4 @@ describe('getSubdirectoriesInfo*', () => {
     ]);
   });
 });
+*/
